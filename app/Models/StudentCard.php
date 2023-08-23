@@ -11,6 +11,8 @@ class StudentCard extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     protected $casts = [
         'school' => SchoolEnum::class,
         'is_internal' => 'boolean',

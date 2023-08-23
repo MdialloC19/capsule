@@ -4,10 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\User;
 use App\Models\StudentCard;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,8 +23,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory(10)
-                ->has(
-                     StudentCard::factory(),
-                )->create();
+            ->has(
+                StudentCard::factory(),
+            )->create();
     }
 }
