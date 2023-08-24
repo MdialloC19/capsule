@@ -3,13 +3,16 @@
 namespace App\Models;
 
 use App\Console\Enums\SchoolEnum;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class StudentCard extends Model
+class StudentCard extends Model implements HasMedia 
 {
     use HasFactory;
+    use InteractsWithMedia;
 
     protected $guarded = [];
 
@@ -18,7 +21,10 @@ class StudentCard extends Model
         'is_internal' => 'boolean',
         'date_of_birth' => 'date',
     ];
-
+    public function registerMediaCollections(): void
+{
+    $this->addMediaCollection('pdf')->singleFile();
+}
     /**
      * @return BelongsTo<User, StudentCard>
      */

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\StudentCard;
 
+use App\Actions\StudentCard\GeneratePdf;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StudentCard\StoreRequest;
 use App\Models\StudentCard;
-use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
@@ -16,6 +16,13 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request): void
     {
-        StudentCard::create($request->validated());
+        
+
+        $studentCard=app(GeneratePdf::class)->handle(
+             StudentCard::create($request->validated()),
+           config('student-cards.pdf.directory')
+        );
+
+        
     }
 }
